@@ -1,3 +1,3 @@
-# Development settings module.
+from .base import *
 
 DEBUG = True

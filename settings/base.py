@@ -1,6 +1,9 @@
 import os
 from django.core.exceptions import ImproperlyConfigured
 
+import dj_database_url
+
+
 def get_env_variable(var_name):
     """Get the environment variable or return exception."""
     try:
@@ -57,12 +60,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'locations.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {'default': dj_database_url.config(conn_max_age=500)}
 
 
 # Password validation

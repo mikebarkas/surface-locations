@@ -1,0 +1,13 @@
+body {
+  font-family: 'Lato', 'Open Sans', sans-serif;
+}
+
+.content-container {
+  padding-top: 70px;
+  padding-bottom: 90px;
+}
+
+footer {
+  height: 80px;
+  color: #e4e4e4;
+}

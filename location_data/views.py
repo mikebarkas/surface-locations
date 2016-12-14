@@ -10,7 +10,7 @@ def state(request):
 
 def city_list(request, state):
     city_data = Location.objects.filter(state=state.upper())
-    paginator = Paginator(city_data, 5)
+    paginator = Paginator(city_data, 15)
     page = request.GET.get('page')
 
     try:

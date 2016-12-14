@@ -1,3 +1,12 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Location
+
+
+def state(request):
+    data = 'Placeholder page content.'
+    return render(request, 'location/state.html', {'data': data})
+
+def city_list(request, state):
+    cities = Location.objects.filter(state=state.upper())
+    return render(request, 'location/city_list.html', {'cities': cities})

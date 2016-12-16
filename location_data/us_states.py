@@ -1,5 +1,5 @@
 def us_states():
-    states = [
+    return [
         ('AK', 'Alaska'),
         ('AL', 'Alabama'),
         ('AR', 'Arkansas'),
@@ -11,7 +11,6 @@ def us_states():
         ('DE', 'Delaware'),
         ('FL', 'Florida'),
         ('GA', 'Georgia'),
-        ('GU', 'Guam'),
         ('HI', 'Hawaii'),
         ('IA', 'Iowa'),
         ('ID', 'Idaho'),
@@ -55,4 +54,3 @@ def us_states():
         ('WV', 'West Virginia'),
         ('WY', 'Wyoming'),
     ]
-    return states

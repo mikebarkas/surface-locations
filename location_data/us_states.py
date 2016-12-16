@@ -1,5 +1,6 @@
 def us_states():
     return [
+        ('', '- Select -'),
         ('AK', 'Alaska'),
         ('AL', 'Alabama'),
         ('AR', 'Arkansas'),

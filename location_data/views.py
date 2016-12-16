@@ -1,12 +1,19 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
 from .models import Location
+from .forms import state_select_form
 
 
 def state(request):
-    data = 'Placeholder page content.'
-    return render(request, 'location/state.html', {'data': data})
+    if request.method == 'POST':
+        form = state_select_form(request.POST)
+        if form.is_valid():
+          return HttpResponseRedirect('/state/' + form.cleaned_data['states'])
+    else:
+        return render(request, 'location/state.html', {'form': state_select_form()})
+
 
 def city_list(request, state):
     city_data = Location.objects.filter(state=state.upper())

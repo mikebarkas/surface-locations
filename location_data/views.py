@@ -10,7 +10,7 @@ def state(request):
     if request.method == 'POST':
         form = state_select_form(request.POST)
         if form.is_valid():
-          return HttpResponseRedirect('/state/' + form.cleaned_data['states'])
+            return HttpResponseRedirect('/state/' + form.cleaned_data['states'])
     else:
         return render(request, 'location/state.html', {'form': state_select_form()})
 

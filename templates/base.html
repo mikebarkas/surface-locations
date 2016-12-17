@@ -18,7 +18,10 @@
   {% endblock nav %}
 
   <div class="content-container container-fluid">
-    {% block content %}{% endblock content %}
+    <div class="row">
+      {% block sidebar %}{% endblock sidebar %}
+      {% block content %}{% endblock content %}
+    </div>
   </div>
 
   {% block footer %}

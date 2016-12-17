@@ -2,14 +2,25 @@
   <div class="container-fluid">
 
     <div class="navbar-header">
+
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+      </button>
       <a class="navbar-brand" href="/">
         Surface Locations
       </a>
     </div>
 
-    <a class="btn btn-success navbar-btn" href="{% url 'index' %}">Home</a>
-    <a class="btn btn-primary navbar-btn" href="{% url 'state' %}">States</a>
-    <a class="btn btn-primary navbar-btn" href="{% url 'about' %}">About</a>
-    <a class="btn btn-warning navbar-btn" href="/admin">Admin</a>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'state' %}">States</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="/admin">Admin</a></li>
+      </ul>
+    </div>
   </div>
 </nav>

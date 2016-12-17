@@ -7,8 +7,9 @@
       </a>
     </div>
 
-    <a class="btn btn-default navbar-btn" href="/">Home</a>
-    <a class="btn btn-default navbar-btn" href="/state/">States</a>
-    <a class="btn btn-default navbar-btn" href="/admin">Admin</a>
+    <a class="btn btn-success navbar-btn" href="{% url 'index' %}">Home</a>
+    <a class="btn btn-primary navbar-btn" href="{% url 'state' %}">States</a>
+    <a class="btn btn-primary navbar-btn" href="{% url 'about' %}">About</a>
+    <a class="btn btn-warning navbar-btn" href="/admin">Admin</a>
   </div>
 </nav>

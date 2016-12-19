@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 
 from .models import Location
 from .forms import StateSelectForm
+from .us_states import us_states
 
 
 def state_select(request):
@@ -18,8 +19,10 @@ def state_select(request):
 
 
 def city_list(request, state):
-    city_data = Location.objects.filter(state=state.upper())
-    paginator = Paginator(city_data, 15)
+    state_name = [(s[0], s[1]) for s in us_states() if s[0] == state]
+    city_data = Location.objects.filter(state=state.upper()).order_by('city').distinct('city')
+
+    paginator = Paginator(city_data, 20)
     page = request.GET.get('page')
 
     try:
@@ -29,4 +32,10 @@ def city_list(request, state):
     except EmptyPage:
         cities = paginator.page(paginator.num_pages)
 
-    return render(request, 'location/city_list.html', {'cities': cities})
+    context = {
+        'cities': cities,
+        'city_count': len(city_data),
+        'state': state_name[0],
+    }
+
+    return render(request, 'location/city_list.html', context)

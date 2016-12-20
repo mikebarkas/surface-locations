@@ -39,3 +39,16 @@ def city_list(request, state):
     }
 
     return render(request, 'location/city_list.html', context)
+
+
+def city_detail(request, state, city):
+    state = state.upper()
+    city = city.upper()
+
+    context = {
+        'state': state,
+        'city': city,
+        'city_data': Location.objects.filter(state=state,city=city)
+    }
+
+    return render(request, 'location/city_detail.html', context)

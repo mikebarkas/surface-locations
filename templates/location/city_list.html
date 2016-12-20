@@ -9,11 +9,7 @@
   <div class="col-sm-3 col-md-2 sidebar">
 
     <ul class="nav nav-sidebar">
-      <li><a href="#">Menu Item</a></li>
-      <li><a href="#">Menu Item</a></li>
-      <li><a href="#">Menu Item</a></li>
-      <li class="active"><a href="#">Menu Item</a></li>
-      <li><a href="#">Menu Item</a></li>
+      <li><a href="{% url 'state-select' %}">Select New State</a></li>
       <li><a href="#">Menu Item</a></li>
     </ul>
 
@@ -26,7 +22,7 @@
 
     {% for city in cities %}
       <div class="well well-sm">
-        <h4>{{ city }}</h4>
+        <a href="/state/{{ state.0|lower }}/{{ city|lower }}"><h4>{{ city }}</h4></a>
       </div>
     {% endfor %}
 

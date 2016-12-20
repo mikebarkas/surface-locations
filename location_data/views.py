@@ -10,7 +10,7 @@ def state_select(request):
     if request.method == 'POST':
         form = StateSelectForm(request.POST)
         if form.is_valid():
-            return redirect('/state/' + form.cleaned_data['states'])
+            return redirect('/state/' + form.cleaned_data['states'].lower())
 
     else:
         form = StateSelectForm()
@@ -19,7 +19,7 @@ def state_select(request):
 
 
 def city_list(request, state):
-    state_name = [(s[0], s[1]) for s in us_states() if s[0] == state]
+    state_name = [(s[0], s[1]) for s in us_states() if s[0] == state.upper()]
     city_data = Location.objects.filter(state=state.upper()).order_by('city').distinct('city')
 
     paginator = Paginator(city_data, 20)
@@ -39,3 +39,16 @@ def city_list(request, state):
     }
 
     return render(request, 'location/city_list.html', context)
+
+
+def city_detail(request, state, city):
+    state = state.upper()
+    city = city.upper()
+
+    context = {
+        'state': state,
+        'city': city,
+        'city_data': Location.objects.filter(state=state,city=city)
+    }
+
+    return render(request, 'location/city_detail.html', context)

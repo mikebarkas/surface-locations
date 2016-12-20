@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+  <div class="col-sm-3 col-md-2 sidebar">
+
+    <ul class="nav nav-sidebar">
+      <li><a href="/state/{{ state|lower }}/">Back to city list</a></li>
+      <li><a href="{% url 'state-select' %}">Select New State</a></li>
+      <li><a href="#">Menu Item</a></li>
+    </ul>
+
+  </div>
+{% endblock sidebar %}
+
+{% block content %}
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h1>{{ city }}, {{ state }}</h1>
+
+  <div class="row">
+    <div class="col-xs-6 text-center">
+      <h3 class="bg-info">Zip code</h3>
+    </div>
+    <div class="col-xs-6 text-center">
+      <h3 class="bg-info">Population</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    {% for c in city_data %}
+      <div class="col-xs-6 text-center">
+        <p>{{ c.zipcode }}</p>
+      </div>
+      <div class="col-xs-6 text-center">
+        <p>{{ c.population }}
+      </div>
+    {% endfor %}
+  </div>
+
+  </div>
+{% endblock content %}

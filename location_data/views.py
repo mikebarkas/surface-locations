@@ -10,7 +10,7 @@ def state_select(request):
     if request.method == 'POST':
         form = StateSelectForm(request.POST)
         if form.is_valid():
-            return redirect('/state/' + form.cleaned_data['states'])
+            return redirect('/state/' + form.cleaned_data['states'].lower())
 
     else:
         form = StateSelectForm()
@@ -19,7 +19,7 @@ def state_select(request):
 
 
 def city_list(request, state):
-    state_name = [(s[0], s[1]) for s in us_states() if s[0] == state]
+    state_name = [(s[0], s[1]) for s in us_states() if s[0] == state.upper()]
     city_data = Location.objects.filter(state=state.upper()).order_by('city').distinct('city')
 
     paginator = Paginator(city_data, 20)

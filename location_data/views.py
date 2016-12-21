@@ -43,7 +43,7 @@ def city_list(request, state):
 
 def city_detail(request, state, city):
     state = state.upper()
-    city = city.upper()
+    city = city.upper().replace('-', ' ')
 
     context = {
         'state': state,

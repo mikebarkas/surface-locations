@@ -22,7 +22,7 @@
 
     {% for city in cities %}
       <div class="well well-sm">
-        <a href="/state/{{ state.0|lower }}/{{ city|lower }}"><h4>{{ city }}</h4></a>
+        <a href="/state/{{ state.0|lower }}/{{ city|slugify }}"><h4>{{ city }}</h4></a>
       </div>
     {% endfor %}
 

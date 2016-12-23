@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import resolve
 
-from .views import state_select, city_list
+from .views import StateSelect, city_list
 
 
 class StateSelectUrlTest(TestCase):
@@ -9,8 +9,8 @@ class StateSelectUrlTest(TestCase):
     def setUp(self):
         self.url = resolve('/state/')
 
-    def test_state_list_url_function(self):
-        self.assertEqual(self.url.func, state_select)
+    def test_state_list_url_class(self):
+        self.assertEqual(self.url.func.__name__, StateSelect.__name__)
 
     def test_state_list_url_name(self):
         self.assertEqual(self.url.url_name, 'state-select')

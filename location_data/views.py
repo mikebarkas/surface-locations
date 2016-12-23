@@ -1,21 +1,18 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
+from django.views.generic import FormView
 
 from .models import Location
 from .forms import StateSelectForm
 from .us_states import us_states
 
 
-def state_select(request):
-    if request.method == 'POST':
-        form = StateSelectForm(request.POST)
-        if form.is_valid():
-            return redirect('/state/' + form.cleaned_data['states'].lower())
+class StateSelect(FormView):
+    form_class = StateSelectForm
+    template_name = 'location/state_select.html'
 
-    else:
-        form = StateSelectForm()
-
-    return render(request, 'location/state_select.html', {'form': form})
+    def form_valid(self, form):
+        return (redirect('/state/' + form.cleaned_data['states'].lower()))
 
 
 def city_list(request, state):

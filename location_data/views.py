@@ -4,7 +4,7 @@ from django.views.generic import FormView
 
 from .models import Location
 from .forms import StateSelectForm
-from .us_states import us_states
+from location_data.us_states import state_abbreviation_and_name
 
 
 class StateSelect(FormView):
@@ -16,7 +16,6 @@ class StateSelect(FormView):
 
 
 def city_list(request, state):
-    state_name = [(s[0], s[1]) for s in us_states() if s[0] == state.upper()]
     city_data = Location.objects.filter(state=state.upper()).order_by('city').distinct('city')
 
     paginator = Paginator(city_data, 20)
@@ -32,7 +31,7 @@ def city_list(request, state):
     context = {
         'cities': cities,
         'city_count': len(city_data),
-        'state': state_name[0],
+        'state': state_abbreviation_and_name(state),
     }
 
     return render(request, 'location/city_list.html', context)

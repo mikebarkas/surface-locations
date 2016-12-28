@@ -1,4 +1,10 @@
+"""US States provides abbreviations and state names,
+    used for creating select lists.
+"""
+
+
 def us_states():
+    """Creates a list of tuples to create select lists."""
     return [
         ('', '- Select -'),
         ('AK', 'Alaska'),
@@ -55,3 +61,15 @@ def us_states():
         ('WV', 'West Virginia'),
         ('WY', 'Wyoming'),
     ]
+
+
+def state_abbreviation_and_name(state_abbreviation):
+    """Returns tuple of state abbreviation and name
+    used in template contexts.
+
+    Args:
+        state_abbreviation: The two letter abbreviation
+    """
+    for state in us_states():
+        if state[0] == state_abbreviation.upper():
+            return (state[0], state[1])

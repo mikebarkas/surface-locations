@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import resolve
 
-from .views import StateSelect, city_list
+from location_data.views import StateSelect, city_list
 
 
 class StateSelectUrlTest(TestCase):

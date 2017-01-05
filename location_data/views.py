@@ -16,7 +16,7 @@ class StateSelect(FormView):
 
 
 def city_list(request, state):
-    city_data = Location.objects.filter(state=state.upper()).order_by('city').distinct('city')
+    city_data = Location.objects.cities_by_state(state)
 
     paginator = Paginator(city_data, 20)
     page = request.GET.get('page')
@@ -44,7 +44,7 @@ def city_detail(request, state, city):
     context = {
         'state': state,
         'city': city,
-        'city_data': Location.objects.filter(state=state,city=city)
+        'city_data': Location.objects.city(state, city),
     }
 
     return render(request, 'location/city_detail.html', context)

@@ -28,8 +28,10 @@
     {% include 'footer.html' %}
   {% endblock footer %}
 
-  <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  {% block javascript %}
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  {% endblock javascript %}
 </body>
 </html>
 

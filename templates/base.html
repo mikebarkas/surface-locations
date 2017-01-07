@@ -5,9 +5,13 @@
   {% block title %}
     <title>Surface Locations</title>
   {% endblock title %}
+
+  {% block css %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}"/>
+  {% endblock css %}
+
   <link rel="shortcut icon" href="{%  static 'favicon.ico' %}"/>
-  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}"/>
   <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -28,8 +32,10 @@
     {% include 'footer.html' %}
   {% endblock footer %}
 
-  <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  {% block javascript %}
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  {% endblock javascript %}
 </body>
 </html>
 

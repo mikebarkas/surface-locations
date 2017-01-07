@@ -22,7 +22,7 @@
 
     {% for city in cities %}
       <div class="well well-sm">
-        <a href="{% url 'city-detail' state=state.0|lower city=city|slugify %}"><h4>{{ city }}</h4></a>
+        <a href="{% url 'city-detail' state=state.0|lower city=city|slugify %}"><h4>{{ city|title }}</h4></a>
       </div>
     {% endfor %}
 

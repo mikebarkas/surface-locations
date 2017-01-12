@@ -4,10 +4,6 @@
   <title>Select a State</title>
 {% endblock title %}
 
-{% block javascript_header %}
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-{% endblock javascript_header %}
-
 {% block content %}
   <div class="container">
     <div class="jumbotron">
@@ -26,3 +22,7 @@
   </div>
 {% endblock content %}
 
+{% block javascript %}
+  {{ block.super }}
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+{% endblock javascript %}

@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
+from django.http import JsonResponse
 
 from .models import Location
 from .forms import StateSelectForm
@@ -48,3 +49,8 @@ def city_detail(request, state, city):
     }
 
     return render(request, 'location/city_detail.html', context)
+
+
+def api_json(request, state):
+    query_set = Location.objects.filter(state=state.upper()).values('population', 'zipcode')
+    return JsonResponse({'results':  list(query_set)})

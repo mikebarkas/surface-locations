@@ -27,8 +27,8 @@
       var margin = {top: 20, right: 20, bottom: 30, left: 40},
           width = 960 - margin.left - margin.right,
           height = 500 - margin.top - margin.bottom;
+          padding = 2;
 
-      var padding = 2;
       var svg = d3.select('#graph-example').append('svg')
           .attr({
             width:width + margin.left + margin.right,
@@ -64,7 +64,7 @@
           'text-anchor': 'middle',
           'font-size': '10',
           x: function(d,i) {return i * (width / dataset.length) + (width / dataset.length - padding) / 2;},
-          y: function(d) {return 400;},
+          y: function(d) {return 470;},
         });
     });
   </script>

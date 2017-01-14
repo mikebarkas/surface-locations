@@ -8,6 +8,51 @@
 <div class="container">
   <h1>About</h1>
   <p>{{ context }}</p>
-
 </div>
+
+<div class="container">
+<div id="graph-example"></div>
+</div>
+
+
 {% endblock content %}
+
+{% block javascript %}
+  {{ block.super }}
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script>
+
+    d3.json("{% url 'api-json' state='NC' %}", function(error, data) {
+
+      var h = 500;
+      var w = 800;
+      var padding = 2;
+      var svg = d3.select('#graph-example').append('svg').attr({width:w, height:h});
+
+      var dataset = data.results;
+
+      svg.selectAll('rect')
+        .data(dataset)
+        .enter()
+        .append('rect')
+        .attr('x', function(d,i) {return i * (w / dataset.length);})
+        .attr('y', function(d) {return h - (d.population * .03) - 15;})
+        .attr('width', function(d) {return w / dataset.length - padding;})
+        .attr('height', function(d) {return (d.population * .03);})
+        .attr('fill', function(d) {return '#336699';});
+
+      svg.selectAll('text')
+        .data(dataset)
+        .enter()
+        .append('text')
+        .text(function(d) {return d.zipcode;})
+        .attr({
+          'text-anchor': 'middle',
+          'font-size': '10',
+          x: function(d,i) {return i * (w / dataset.length) + (w / dataset.length - padding) / 2;},
+          y: function(d) {return 500;},
+        });
+    });
+  </script>
+
+{% endblock javascript %}

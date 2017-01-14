@@ -29,7 +29,7 @@
           height = 500 - margin.top - margin.bottom;
 
       var padding = 2;
-      var svg = d3.select('#graph-example').append('svg').attr({width:w, height:h});
+      var svg = d3.select('#graph-example').append('svg').attr({width:width, height:height});
 
       var dataset = data.results;
 
@@ -37,9 +37,9 @@
         .data(dataset)
         .enter()
         .append('rect')
-        .attr('x', function(d,i) {return i * (w / dataset.length);})
-        .attr('y', function(d) {return h - (d.population * .03) - 15;})
-        .attr('width', function(d) {return w / dataset.length - padding;})
+        .attr('x', function(d,i) {return i * (width / dataset.length);})
+        .attr('y', function(d) {return height - (d.population * .03) - 15;})
+        .attr('width', function(d) {return width / dataset.length - padding;})
         .attr('height', function(d) {return (d.population * .03);})
         .attr('fill', function(d) {return '#336699';});
 
@@ -51,8 +51,8 @@
         .attr({
           'text-anchor': 'middle',
           'font-size': '10',
-          x: function(d,i) {return i * (w / dataset.length) + (w / dataset.length - padding) / 2;},
-          y: function(d) {return 500;},
+          x: function(d,i) {return i * (width / dataset.length) + (width / dataset.length - padding) / 2;},
+          y: function(d) {return 400;},
         });
     });
   </script>

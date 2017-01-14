@@ -29,7 +29,13 @@
           height = 500 - margin.top - margin.bottom;
 
       var padding = 2;
-      var svg = d3.select('#graph-example').append('svg').attr({width:width, height:height});
+      var svg = d3.select('#graph-example').append('svg')
+          .attr({
+            width:width + margin.left + margin.right,
+            height:height + margin.top + margin.bottom
+          })
+          .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       var dataset = data.results;
 

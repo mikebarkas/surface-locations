@@ -41,6 +41,8 @@
 
       var y = d3.scale.linear().range([height, 0]);
 
+      y.domain([0, d3.max(dataset, function(d) { return d.population; })]);
+
       var yAxis = d3.svg.axis()
           .scale(y)
           .orient('left');
@@ -50,10 +52,20 @@
         .enter()
         .append('rect')
         .attr('x', function(d,i) {return i * (width / dataset.length);})
-        .attr('y', function(d) {return height - (d.population * .03) - 15;})
+        .attr('y', function(d) {return y(d.population);})
         .attr('width', function(d) {return width / dataset.length - padding;})
-        .attr('height', function(d) {return (d.population * .03);})
+        .attr('height', function(d) {return height - y(d.population);})
         .attr('fill', function(d) {return '#336699';});
+
+      svg.append('g')
+          .attr('class', 'y axis')
+          .call(yAxis)
+        .append('text')
+          .attr('transform', 'rotate(-90)')
+          .attr('y', -20)
+          .attr('dy', '.71em')
+          .style('text-anchor', 'end')
+          .text('Population');
 
       svg.selectAll('text')
         .data(dataset)

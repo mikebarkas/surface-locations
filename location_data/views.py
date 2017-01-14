@@ -52,5 +52,5 @@ def city_detail(request, state, city):
 
 
 def api_json(request, state):
-    query_set = Location.objects.filter(state=state.upper()).values('population', 'zipcode')
+    query_set = Location.objects.filter(state=state.upper()).values('population', 'zipcode')[:20]
     return JsonResponse({'results':  list(query_set)})

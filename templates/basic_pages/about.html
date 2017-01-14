@@ -24,8 +24,10 @@
 
     d3.json("{% url 'api-json' state='NC' %}", function(error, data) {
 
-      var h = 500;
-      var w = 800;
+      var margin = {top: 20, right: 20, bottom: 30, left: 40},
+          width = 960 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
       var padding = 2;
       var svg = d3.select('#graph-example').append('svg').attr({width:w, height:h});
 

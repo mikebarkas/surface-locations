@@ -30,20 +30,20 @@
   <script src="https://d3js.org/d3.v3.min.js"></script>
   <script>
 
-    d3.json("{% url 'api-json' state='ma' %}", function(error, data) {
+    var margin = {top: 20, right: 20, bottom: 40, left: 40},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+        padding = 2;
 
-      var margin = {top: 20, right: 20, bottom: 40, left: 40},
-          width = 960 - margin.left - margin.right,
-          height = 500 - margin.top - margin.bottom;
-          padding = 2;
+    var svg = d3.select('#graph-example').append('svg')
+        .attr({
+          width:width + margin.left + margin.right,
+          height:height + margin.top + margin.bottom
+        })
+        .append('g')
+        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-      var svg = d3.select('#graph-example').append('svg')
-          .attr({
-            width:width + margin.left + margin.right,
-            height:height + margin.top + margin.bottom
-          })
-          .append('g')
-          .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+    d3.json("{% url 'api-json' state='fl' %}", function(error, data) {
 
       var dataset = data.results;
 
@@ -82,13 +82,13 @@
           .attr('class', 'y axis')
           .call(yAxis)
           .attr('font-size', '10')
-        .append('text')
-          .attr('transform', 'rotate(-90)')
-          .attr('y', 5)
-          .attr('dy', '.71em')
-          .attr('font-size', '16')
-          .style('text-anchor', 'end')
-          .text('Population');
+          .append('text')
+            .attr('transform', 'rotate(-90)')
+            .attr('y', 5)
+            .attr('dy', '.71em')
+            .attr('font-size', '16')
+            .style('text-anchor', 'end')
+            .text('Population');
 
     });
   </script>

@@ -43,54 +43,72 @@
         .append('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-    d3.json("{% url 'api-json' state='fl' %}", function(error, data) {
-
-      var dataset = data.results;
+    function drawChart(selectedState='fl') {
 
       var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
       var y = d3.scale.linear().range([height, 0]);
 
-      x.domain(dataset.map(function(d) { return d.zipcode; }));
-      y.domain([0, d3.max(dataset, function(d) { return d.population; })]);
-
       var xAxis = d3.svg.axis().scale(x).orient('bottom');
       var yAxis = d3.svg.axis().scale(y).orient('left');
 
-      svg.selectAll('rect')
-        .data(dataset)
-        .enter()
-        .append('rect')
+      d3.json('{% url "api-json" %}?state=' + selectedState, function(error, data) {
+        var dataset = data.results;
+
+        x.domain(dataset.map(function(d) { return d.zipcode; }));
+        y.domain([0, d3.max(dataset, function(d) { return d.population; })]);
+
+        var bar = svg.selectAll('rect').data(dataset);
+
+        bar.enter().append('rect')
           .attr('x', function(d) {return x(d.zipcode);})
           .attr('y', function(d) {return y(d.population);})
           .attr('width', x.rangeBand())
           .attr('height', function(d) {return height - y(d.population);})
           .attr('fill', function(d) {return '#336699';});
 
-      svg.append('g')
-        .attr('class', 'x axis')
-        .attr('transform', 'translate(0,' + height + ')')
-        .attr('font-size', '10')
-        .call(xAxis)
-        .append('text')
-          .attr('x', (width / 2))
-          .attr('y', 35)
-          .attr('font-size', '16')
-          .style('text-anchor', 'end')
-          .text('Zipcode');
+        bar.exit().remove();
 
-      svg.append('g')
-          .attr('class', 'y axis')
-          .call(yAxis)
+        bar.transition().duration(750);
+        bar.attr('y', function(d) {return y(d.population);});
+        bar.attr('height', function(d) {return height - y(d.population);});
+
+        svg.select('.x.axis').remove();
+        svg.select('.y.axis').remove();
+
+        svg.append('g')
+          .attr('class', 'x axis')
+          .attr('transform', 'translate(0,' + height + ')')
           .attr('font-size', '10')
+          .call(xAxis)
           .append('text')
-            .attr('transform', 'rotate(-90)')
-            .attr('y', 5)
-            .attr('dy', '.71em')
+            .attr('x', (width / 2))
+            .attr('y', 35)
             .attr('font-size', '16')
             .style('text-anchor', 'end')
-            .text('Population');
+            .text('Zipcode');
+
+        svg.append('g')
+            .attr('class', 'y axis')
+            .call(yAxis)
+            .attr('font-size', '10')
+            .append('text')
+              .attr('transform', 'rotate(-90)')
+              .attr('y', 20)
+              .attr('font-size', '16')
+              .style('text-anchor', 'end')
+              .text('Population');
+
+      });
+    }
+
+    d3.select('#state-selector')
+      .on('change', function(d) {
+
+      selectedState = d3.select('#state-selector').node().value;
+      drawChart(selectedState);
 
     });
+    drawChart();
   </script>
 
 {% endblock javascript %}

@@ -7,16 +7,16 @@
 {% block content %}
 <div class="container">
   <h1>About</h1>
-  <p>{{ context }}</p>
+  <p>{{ content }}</p>
 </div>
 
 <div class="container">
   <div class="well">
-    Select a state:
+    Filter by state:
     <select id="state-selector">
-      <option value="ma">MA</option>
-      <option value="nc">NC</option>
-      <option value="fl">FL</option>
+      {% for state in us_states %}
+        <option value="{{ state.0 }}">{{ state.1 }}</option>
+      {% endfor %}
     </select>
   </div>
 <div id="graph-example"></div>

@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_list_or_404
 from django.views.generic import FormView
 from django.http import JsonResponse
 
@@ -17,7 +17,7 @@ class StateSelect(FormView):
 
 
 def city_list(request, state):
-    city_data = Location.objects.cities_by_state(state)
+    city_data = get_list_or_404(Location.objects.cities_by_state(state))
 
     paginator = Paginator(city_data, 20)
     page = request.GET.get('page')
@@ -45,7 +45,7 @@ def city_detail(request, state, city):
     context = {
         'state': state,
         'city': city,
-        'city_data': Location.objects.city(state, city),
+        'city_data': get_list_or_404(Location.objects.city(state, city)),
     }
 
     return render(request, 'location/city_detail.html', context)

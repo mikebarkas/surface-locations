@@ -4,7 +4,7 @@ from django.views.generic import FormView
 from django.http import JsonResponse
 
 from .models import Location
-from .forms import StateSelectForm
+from .forms import StateSelectForm, CitySearchForm
 from location_data.us_states import state_abbreviation_and_name
 
 
@@ -13,7 +13,16 @@ class StateSelect(FormView):
     template_name = 'location/state_select.html'
 
     def form_valid(self, form):
-        return (redirect('/state/' + form.cleaned_data['states'].lower()))
+        return redirect('/state/' + form.cleaned_data['states'].lower())
+
+
+class CitySearch(FormView):
+    form_class = CitySearchForm
+    template_name = 'location/city_search.html'
+
+    def form_valid(self, form):
+        city, state = form.cleaned_data['cities'].split(', ')
+        return redirect('/state/' + state.lower() + '/' + city.lower().replace(' ', '-'))
 
 
 def city_list(request, state):
@@ -56,3 +65,12 @@ def api_json(request):
     query_set = Location.objects.filter(state=selected_state.upper()).values('population', 'zipcode')[:20]
 
     return JsonResponse({'results':  list(query_set)})
+
+
+def api_city_search(request):
+    search_city = request.GET.get('term', 'charlotte')
+
+    query_set = Location.objects.filter(city__icontains=search_city).values('city', 'state').distinct()
+    result_list = [city['city'] + ', ' + city['state'] for city in query_set]
+
+    return JsonResponse(result_list, safe=False)

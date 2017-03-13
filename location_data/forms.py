@@ -12,5 +12,5 @@ class StateSelectForm(forms.Form):
 
 class CitySearchForm(forms.Form):
     cities = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'root'})
+        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'city-search'})
     )

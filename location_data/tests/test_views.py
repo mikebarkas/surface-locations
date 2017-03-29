@@ -19,7 +19,7 @@ class StateSelectUrlTest(TestCase):
 class CityListUrlTest(TestCase):
 
     def setUp(self):
-        self.url = resolve('/state/me/')
+        self.url = resolve('/state/me/all')
 
     def test_city_list_url_function(self):
         self.assertEqual(self.url.func, city_list)

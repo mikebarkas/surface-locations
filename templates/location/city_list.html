@@ -9,8 +9,8 @@
   <div class="col-sm-3 col-md-2 sidebar">
 
     <ul class="nav nav-sidebar">
-      <li><a href="{% url 'state-select' %}">Select New State</a></li>
-      <li><a href="#">Menu Item</a></li>
+      <li><a href="{% url 'state-page' state=state.0|lower %}">Back to state page</a></li>
+      <li><a href="{% url 'state-select' %}">Select a new state</a></li>
     </ul>
 
   </div>

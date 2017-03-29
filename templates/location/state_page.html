@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap_pagination %}
+
+{% block title %}
+  <title>State of {{ state.1 }}</title>
+{% endblock title %}
+
+{% block sidebar %}
+  <div class="col-sm-3 col-md-2 sidebar">
+
+    <ul class="nav nav-sidebar">
+      <li><a href="{% url 'state-select' %}">Select New State</a></li>
+      <li><a href="{% url 'city-list' state=state.0|lower %}">City list for {{ state.0 }}</a></li>
+    </ul>
+
+  </div>
+{% endblock sidebar %}
+
+{% block content %}
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1>{{ state.1 }}</h1>
+  </div>
+{% endblock %}
+
+

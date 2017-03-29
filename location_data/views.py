@@ -25,6 +25,15 @@ class CitySearch(FormView):
         return redirect('/state/' + state.lower() + '/' + city.lower().replace(' ', '-'))
 
 
+def state_page(request, state):
+    state = state_abbreviation_and_name(state)
+    context = {
+        'state_abbreviation': state[0],
+        'state_name': state[1],
+    }
+    return render(request, 'location/state_page.html', context)
+
+
 def city_list(request, state):
     city_data = get_list_or_404(Location.objects.cities_by_state(state))
 
